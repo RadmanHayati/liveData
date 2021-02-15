@@ -2,6 +2,7 @@ package com.example.livedata
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -34,5 +35,21 @@ class MainActivity : AppCompatActivity() {
       )
       */
 
+        var incrementCounter = 0
+        var btnhi=findViewById<Button>(R.id.btnHelloWorld)
+        btnhi.setOnClickListener(){
+            liveData.postValue(incrementCounter++.toString())
+        }
+        liveData.observe(this, Observer {
+
+            btnhi.text="hello $it"
+        })
+        //we made a variable with type of live data now whenever it changes we can do an operation
+        //-so we put the incrementCounter in it and whenever incrementCounter changes the value of
+        //- that variable changes too.
+        // now that we find out when it changes and the changes are the number of our variable
+        // we can do as many operations on it as we want in this case we have two observers
+        // one of them toasts the changed value which is incrementCounter++ and the other one
+        //-sets it as the text attribute of our button (btnHelloWorld)q
     }
 }
